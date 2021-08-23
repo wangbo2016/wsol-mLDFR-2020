@@ -12,19 +12,11 @@ cfg = get_config()
 print(cfg)
 
 # create transformer
-if cfg.dataset.name == 'cub200':
-    val_transformer = transforms.Compose([
-            transforms.Resize(cfg.network.img_size+32),
-            transforms.CenterCrop(cfg.network.img_size),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])    
-elif cfg.dataset.name == 'ilsvrc':
-    val_transformer = transforms.Compose([
-            transforms.Resize(cfg.network.img_size),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])    
+val_transformer = transforms.Compose([
+        transforms.Resize(cfg.network.img_size),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ])    
 # create dataset
 if   cfg.dataset.name == 'cub200':
     valset = CUBProcessor(dataset_root=cfg.dataset.root, dataset_type='test', load_obj_label=True, transform=val_transformer)
