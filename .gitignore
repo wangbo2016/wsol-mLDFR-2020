@@ -3,3 +3,5 @@ checkpoints/*
 engine/__pycache__
 logs/*
 results/*
+runs
+.vscode
