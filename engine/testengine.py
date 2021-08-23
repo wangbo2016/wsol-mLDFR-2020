@@ -23,30 +23,10 @@ from tools.dmetric import cor_loc_s, calc_ious, calc_ious_cross
 from tools.dhelper import localize_bbox, draw_bbox, draw_hmap 
 from tools.pytorch_tools import print_model_param_nums, print_model_param_flops
 from models.vgg16bnlocalizer import VGG16BNLocalizer
-# from models.vgg16bnlocalizerhma import VGG16BNLocalizer
-# from models.vgg16bnlocalizercbam import VGG16BNLocalizer
-# from models.densenet161localizer import DenseNet161Localizer
-from models.densenet161localizercbam import DenseNet161Localizer
-# from models.densenet161localizerhma import DenseNet161Localizer
+from models.vgg16bnlocalizerhma import VGG16BNLocalizer
+from models.densenet161localizer import DenseNet161Localizer
+from models.densenet161localizerhma import DenseNet161Localizer
 from models.resnet50localizerhma import ResNet50Localizer
-
-# from models.VGG16LocalizerYCSAtt import VGG16Localizer
-# from backbone.VGG16LocalizerY import VGG16Localizer
-# # from backbone.VGG16BNLocalizerY import VGG16BNLocalizer
-# from backbone.VGG16BNLocalizerZCSAtt import VGG16BNLocalizer
-# # from backbone.VGG16BNLocalizerYGAPCBAM import VGG16Localizer as VGG16BNLocalizer
-# from backbone.InceptionV3LocalizerYCSAtt import InceptionV3Localizer
-# # from backbone.ResNet50LocalizerX import ResNet50Localizer
-# from backbone.ResNet50LocalizerYCSAtt import ResNet50Localizer
-# from backbone.ResNet50Logits import ResNet50Logits
-# # from backbone.MobileNetV2LocalizerY import MobileNetLocalizer
-# # from backbone.MobileNetV2LocalizerX import MobileNetLocalizer
-# from backbone.MobileNetV2LocalizerZCSAtt import MobileNetLocalizer
-# from backbone.MobileNetV2Logits import MobileNetLogits
-# from backbone.DenseNet161LocalizerXCSAtt import DenseNet161Localizer
-# from backbone.GoogLeNetBNLocalizeXCSAtt import GoogLeNetBNLocalizer
-# # from backbone.ResNet50LocalizerZCSAtt_NBN import ResNet50Localizer_NBN
-# from backbone.ResNet50LocalizerY_NBN import ResNet50Localizer_NBN
 
 class TestEngine(object):
     # Func:

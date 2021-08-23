@@ -1,23 +1,16 @@
 import os
-import sys
 import time
 import datetime
 import numpy as np
-import sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.backends.cudnn as cudnn
-import torch.utils.model_zoo as model_zoo
-import torchvision.transforms as transforms
-import torchnet as tnt
 from tqdm import tqdm
 from collections import OrderedDict
 from tools.cmetric import MultiClassificationMetric, MultilabelClassificationMetric, accuracy
-from models.densenet161localizerhma import DenseNet161Localizer
 from models.resnet50localizerhma import ResNet50Localizer
 from models.inceptionv3localizerhma import InceptionV3Localizer
+from models.densenet161localizerhma import DenseNet161Localizer
 
 class TrainEngine(object):
     # Func:
