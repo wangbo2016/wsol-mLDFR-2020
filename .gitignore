@@ -1,0 +1,5 @@
+__pycache__
+checkpoints/*
+engine/__pycache__
+logs/*
+results/*
