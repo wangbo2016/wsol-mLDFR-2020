@@ -1,5 +1,4 @@
 import os
-import sys
 import time
 import pickle
 import datetime
@@ -10,10 +9,7 @@ import gc
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.backends.cudnn as cudnn
-import torch.utils.model_zoo as model_zoo
 import torchvision.transforms as transforms
-import torchnet as tnt
 from PIL import Image
 from tqdm import tqdm
 from functools import reduce
@@ -21,12 +17,11 @@ from collections import OrderedDict
 from tools.cmetric import MultiClassificationMetric, MultilabelClassificationMetric, accuracy
 from tools.dmetric import cor_loc_s, calc_ious, calc_ious_cross
 from tools.dhelper import localize_bbox, draw_bbox, draw_hmap 
-from tools.pytorch_tools import print_model_param_nums, print_model_param_flops
-from models.vgg16bnlocalizer import VGG16BNLocalizer
 from models.vgg16bnlocalizerhma import VGG16BNLocalizer
-from models.densenet161localizer import DenseNet161Localizer
-from models.densenet161localizerhma import DenseNet161Localizer
+from models.googlenetlocalizerhma import GoogLeNetBNLocalizer
 from models.resnet50localizerhma import ResNet50Localizer
+from models.inceptionv3localizerhma import InceptionV3Localizer
+from models.densenet161localizerhma import DenseNet161Localizer
 
 class TestEngine(object):
     # Func:
@@ -49,34 +44,16 @@ class TestEngine(object):
     #   Create experimental environment 
     def create_env(self):
         # create network 
-        if self.cfg_.experiment_type == 'cls':
-            if   self.cfg_.network.name == 'vgg16':
-                self.netloc_ = VGG16Localizer(cls_num=self.cfg_.network.out_size)
-            elif self.cfg_.network.name == 'vgg16bn':
-                self.netloc_ = VGG16BNLocalizer(cls_num=self.cfg_.network.out_size)  
-            elif self.cfg_.network.name == 'googlenetbn':
-                self.netloc_ = GoogLeNetBNLocalizer(cls_num=self.cfg_.network.out_size)                  
-            elif self.cfg_.network.name == 'resnet50':
-                self.netloc_ = ResNet50Logits(cls_num=self.cfg_.network.out_size)             
-            elif self.cfg_.network.name == 'mobilenetv2':
-                self.netloc_ = MobileNetLogits(cls_num=self.cfg_.network.out_size)                        
-        else:
-            if   self.cfg_.network.name == 'vgg16':
-                self.netloc_ = VGG16Localizer(cls_num=self.cfg_.network.out_size)
-            elif self.cfg_.network.name == 'vgg16bn':
-                self.netloc_ = VGG16BNLocalizer(cls_num=self.cfg_.network.out_size)  
-            elif self.cfg_.network.name == 'googlenetbn':
-                self.netloc_ = GoogLeNetBNLocalizer(cls_num=self.cfg_.network.out_size)                        
-            elif self.cfg_.network.name == 'inceptionv3':
-                self.netloc_ = InceptionV3Localizer(cls_num=self.cfg_.network.out_size)                
-            elif self.cfg_.network.name == 'resnet50':
-                self.netloc_ = ResNet50Localizer(cls_num=self.cfg_.network.out_size)  
-            elif self.cfg_.network.name == 'resnet50_nbn':
-                self.netloc_ = ResNet50Localizer_NBN(cls_num=self.cfg_.network.out_size)                  
-            elif self.cfg_.network.name == 'mobilenetv2':
-                self.netloc_ = MobileNetLocalizer(cls_num=self.cfg_.network.out_size)     
-            elif self.cfg_.network.name == 'densenet161':
-                self.netloc_ = DenseNet161Localizer(cls_num=self.cfg_.network.out_size)   
+        if   self.cfg_.network.name == 'vgg16bn':
+            self.netloc_ = VGG16BNLocalizer(cls_num=self.cfg_.network.out_size)  
+        elif self.cfg_.network.name == 'googlenetbn':
+            self.netloc_ = GoogLeNetBNLocalizer(cls_num=self.cfg_.network.out_size)                        
+        elif self.cfg_.network.name == 'inceptionv3':
+            self.netloc_ = InceptionV3Localizer(cls_num=self.cfg_.network.out_size)                
+        elif self.cfg_.network.name == 'resnet50':
+            self.netloc_ = ResNet50Localizer(cls_num=self.cfg_.network.out_size)  
+        elif self.cfg_.network.name == 'densenet161':
+            self.netloc_ = DenseNet161Localizer(cls_num=self.cfg_.network.out_size)   
                 
         # load state_dict(with dataparallel)
         checkpoint = torch.load(self.cfg_.test.params_path, map_location='cuda:0')
