@@ -1,0 +1,45 @@
+experiment_name: vgg16 for cub200
+experiment_mode: loc
+experiment_extr: att-s
+experiment_type: test
+
+dataset:
+  name: cub200  # 
+  root: /data/CUB-200-2011    
+  crop: RandomResizedCrop     
+
+network:
+  name: vgg16bn
+  img_size: 224
+  cam_size: 14
+  out_size: 200
+
+train:
+  epoch_sp: 0
+  epoch_ep: 45
+  batch_size: 256
+  device_ids: [0,1,2]
+  worker_num: 4
+  params_path: /home/bowang/.torch/vgg16_bn-6c64b313.pth
+  resume_path: 
+  optimizer:
+    name: sgd
+    momentum: 0.9
+    weight_decay: 1e-4
+  scheduler:
+    name: max
+    factor: 0.1
+    patience: 2
+    step_size: 7
+
+test:
+  batch_size: 1
+  device_ids: [0]
+  img_scales: [224,336,448]
+  cam_segthd: 0.2
+  params_path: /home/bowang/code-mypaper/wsol-mLDFR-2020/logs/loc-vgg16bn-cub200-b64-f14-sgd-max-99.98-100.0-80.83-94.48/20200415-13-32-53.pth
+  locbox_root: results/loc-vgg16bn-cub200-b64-f14-sgd-max-99.98-100.0-80.83-94.48-53-s02-224-336-448.box
+  scores_file: results/loc-vgg16bn-cub200-b64-f14-sgd-max-99.98-100.0-80.83-94.48-53.preds
+  corloc_file: results/loc-vgg16bn-cub200-b64-f14-sgd-max-99.98-100.0-80.83-94.48-53-s02-224-336-448.corloc_box
+  clsloc_file: results/loc-vgg16bn-cub200-b64-f14-sgd-max-99.98-100.0-80.83-94.48-53-s02-224-336-448.clsloc_box
+  visual_root: results/loc-vgg16bn-cub200-b64-f14-sgd-max-99.98-100.0-80.83-94.48-53-s02-224-336-448-p1n2xx.vis  

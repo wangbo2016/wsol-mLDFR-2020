@@ -76,22 +76,3 @@ test_engine.analyze_performance(
     corloc_file=cfg.test.corloc_file, 
     clsloc_file=cfg.test.clsloc_file,
     iou_thrd=0.7) 
-
-# ----------------------------------
-# Val - Visualization
-# ----------------------------------
-# visualization
-# if not os.path.exists(cfg.test.vis_root): os.makedirs(cfg.test.vis_root)
-# test_engine.visualize(
-#     val_loader=val_loader, 
-#     locbox_root=cfg.test.locbox_root, 
-#     vis_root=cfg.test.vis_root, 
-#     img_scales=cfg.test.img_scales, 
-#     cam_segthd=0.2)
-
-# if not os.path.exists(cfg.test.vis_root): os.makedirs(cfg.test.vis_root)
-# test_engine.visualize_details(
-#     val_loader=val_loader, 
-#     vis_root=cfg.test.vis_root, 
-#     img_scales=cfg.test.img_scales, 
-#     cam_segthd=cfg.test.cam_segthd)

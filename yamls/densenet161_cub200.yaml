@@ -1,0 +1,45 @@
+experiment_name: densenet161 for cub200
+experiment_type: loc
+experiment_extr: hma-cs
+experiment_type: train
+
+dataset:
+  name: cub200  # ilsvrc
+  root: /data/CUB-200-2011    
+  crop: RandomResizedCrop   
+
+network:
+  name: densenet161
+  img_size: 224
+  cam_size: 14
+  out_size: 200
+
+train:
+  epoch_sp: 0
+  epoch_ep: 45
+  batch_size: 128
+  device_ids: [0,1,2,3,4]
+  worker_num: 4
+  params_path: /home/bowang/.torch/densenet161-8d451a50.pth
+  resume_path: 
+  optimizer:
+    name: sgd
+    momentum: 0.9
+    weight_decay: 1e-4
+  scheduler:
+    name: max
+    factor: 0.1
+    patience: 2
+    step_size: 7
+
+test:
+  batch_size: 1
+  device_ids: [0]
+  img_scales: [224, 336, 448]
+  cam_segthd: 0.2
+  params_path: /home/bowang/code-mypaper-gpl/wsol-mLDFR-2020/logs/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834/20210115-09-14-41.pth
+  locbox_root: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.box
+  scores_file: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41.preds
+  corloc_file: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.corloc_box
+  clsloc_file: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.clsloc_box
+  visual_root: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.vis  

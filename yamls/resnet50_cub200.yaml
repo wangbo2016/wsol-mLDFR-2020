@@ -1,0 +1,45 @@
+experiment_name: resnet50 for cub200
+experiment_mode: loc
+experiment_extr: hma-cs
+experiment_type: train
+
+dataset:
+  name: cub200  # 
+  root: /data/CUB-200-2011    
+  crop: RandomResizedCrop     
+  
+network:
+  name: resnet50
+  img_size: 224
+  cam_size: 14
+  out_size: 200
+
+train:
+  epoch_sp: 0
+  epoch_ep: 45  
+  batch_size: 256
+  device_ids: [0,1,2,3]
+  worker_num: 6
+  params_path: /home/bowang/.torch/resnet50-19c8e357.pth
+  resume_path: 
+  optimizer:
+    name: sgd
+    momentum: 0.9
+    weight_decay: 1e-4
+  scheduler:
+    name: max
+    factor: 0.1
+    patience: 2
+    step_size: 7
+
+test:
+  batch_size: 1
+  device_ids: [0]
+  img_scales: [224,336,448]
+  cam_segthd: 0.2
+  params_path: /home/bowang/code-mypaper/wsol-mLDFR-2020/logs/loc-resnet50-cub200-b128-f14-sgd-max-att-cs-202102041405/20210204-14-26-39.pth
+  locbox_root: resultsloc-resnet50-cub200-b128-f14-sgd-max-att-cs-202102041405-39-s02-224-336-448.box
+  scores_file: resultsloc-resnet50-cub200-b128-f14-sgd-max-att-cs-202102041405-39.preds
+  corloc_file: resultsloc-resnet50-cub200-b128-f14-sgd-max-att-cs-202102041405-39-s02-224-336-448.corloc_box
+  clsloc_file: resultsloc-resnet50-cub200-b128-f14-sgd-max-att-cs-202102041405-39-s02-224-336-448.clsloc_box
+  visual_root: resultsloc-resnet50-cub200-b128-f14-sgd-max-att-cs-202102041405-39-s02-224-336-448-p1n2xx.vis  
