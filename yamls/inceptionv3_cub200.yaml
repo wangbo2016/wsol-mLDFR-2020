@@ -18,7 +18,7 @@ train:
   epoch_sp: 0
   epoch_ep: 45
   batch_size: 256
-  device_ids: [0,1,2,3,4]
+  device_ids: [0,1,2,3]
   worker_num: 4
   params_path: /home/bowang/.torch/inception_v3_google-1a9a5a14.pth
   resume_path: 
@@ -28,9 +28,9 @@ test:
   device_ids: [0]
   img_scales: [299, 448, 597]
   cam_segthd: 0.2
-  params_path: /home/bowang/code-mypaper-gpl/wsol-mLDFR-2020/logs/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834/20210115-09-14-41.pth
-  locbox_root: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.box
-  scores_file: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41.preds
-  corloc_file: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.corloc_box
-  clsloc_file: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.clsloc_box
-  visual_root: results/loc-densenet161-cub200-b96-f14-sgd-max-cbam-cs-202101150834-41-s02-224-336-448.vis  
+  params_path: /home/bowang/code-mypaper-gpl/wsol-mLDFR-2020/logs/loc-inceptionv3-cub200-b256-f17-sgd-max-hma-cs-202108241409/20210824-14-27-29.pth
+  locbox_root: results/loc-inceptionv3-cub200-b256-f17-sgd-max-hma-cs-202108241409-29-s02-224-336-448.box
+  scores_file: results/loc-inceptionv3-cub200-b256-f17-sgd-max-hma-cs-202108241409-29.preds
+  corloc_file: results/loc-inceptionv3-cub200-b256-f17-sgd-max-hma-cs-202108241409-29-s02-224-336-448.corloc_box
+  clsloc_file: results/loc-inceptionv3-cub200-b256-f17-sgd-max-hma-cs-202108241409-29-s02-224-336-448.clsloc_box
+  visual_root: results/loc-inceptionv3-cub200-b256-f17-sgd-max-hma-cs-202108241409-29-s02-224-336-448.vis  
